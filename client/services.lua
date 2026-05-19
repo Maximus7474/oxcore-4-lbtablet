@@ -29,11 +29,12 @@ function GetJobGrade()
 end
 
 RegisterNetEvent("ox:player:activeGroup", function(value)
-    print('ox:player:activeGroup', value)
     if GetJob() == value then
-        SendNUIAction("services:setDuty", job.onDuty)
+        SendNUIAction("services:setDuty", true)
         return
     end
+
+    SendNUIAction("services:setDuty", false)
 
     Wait(0)
     TriggerEvent("lb-tablet:jobUpdated")
