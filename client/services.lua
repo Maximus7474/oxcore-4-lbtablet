@@ -56,7 +56,7 @@ function GetCompanyData()
         receiveCalls = GetCompanyCallsStatus and GetCompanyCallsStatus()
     }
 
-    companyData.job = OxPlayer.get("activeGroup")
+    companyData.job = GetJob()
 
     if not companyData.job then
         return {}
