@@ -29,7 +29,7 @@ Queries.Users.Table = "characters"
 Queries.Users.Select = {
     identifier = "CAST(user.charId AS CHAR)",
     name = "user.fullName",
-    dob = "DATE_FORMAT(user.dateOfBirth, '%%d/%%m/%%Y')",
+    dob = "CAST(DATE_FORMAT(user.dateOfBirth, '%d/%m/%Y') AS CHAR)",
     isMale = "user.gender = 'male'",
 }
 
