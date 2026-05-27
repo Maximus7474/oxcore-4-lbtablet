@@ -73,12 +73,12 @@ function GetJobGrades(jobs)
     }
 end
 
----@param companies string[]
-function GetEmployees(companies)
+---@param mdt string
+function GetEmployees(mdt)
     local query = ([[
         SELECT c.charId AS id,
-        a.callsign,
-        a.avatar,
+        e.callsign,
+        e.avatar,
         c.fullName AS `name`,
         cg.`name` AS job,
         cg.grade AS `rank`
@@ -86,7 +86,8 @@ function GetEmployees(companies)
 
         FROM character_groups cg
         LEFT JOIN characters c ON cg.charId = c.charId
-        LEFT JOIN lbtablet_police_accounts a ON a.id = c.charId %s
+        LEFT JOIN lbtablet_mdt_employees e
+            ON e.id = c.charId %s AND e.department = ?
         %s
 
         WHERE cg.`name` IN (?)
@@ -110,7 +111,7 @@ function GetEmployees(companies)
         query = query:format("", "")
     end
 
-    return MySQL.query.await(query, { companies })
+    return MySQL.query.await(query, { mdt, MDTs[mdt].jobsArray })
 end
 
 ---@param jobs { [string]: any }
