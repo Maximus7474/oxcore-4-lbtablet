@@ -59,7 +59,7 @@ function GetCompanyData()
 
     companyData.job = GetJob()
 
-    if not companyData.job then
+    if companyData.job == 'unemployed' then
         return {}
     end
 
